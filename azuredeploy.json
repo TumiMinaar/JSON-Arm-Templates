@@ -1,0 +1,45 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {},
+  "resources": [
+      {
+          "name": "mylearningvnet",
+          "type": "Microsoft.Network/virtualNetworks",
+          "location": "[resourceGroup().US east]",
+          "apiVersion": "2015-06-15",
+          "dependsOn": [],
+          "tags": {
+              "displayName": "mylearningvnet"
+          },
+          "properties": {
+              "addressSpace": {
+                  "addressPrefixes": [
+                      "[variables('mylearningvnetPrefix')]"
+                  ]
+              },
+              "subnets": [
+                  {
+                      "name": "[variables('mylearningvnetSubnet1Name')]",
+                      "properties": {
+                          "addressPrefix": "[variables('mylearningvnetSubnet1Prefix')]"
+                      }
+                  },
+                  {
+                      "name": "[variables('mylearningvnetSubnet2Name')]",
+                      "properties": {
+                          "addressPrefix": "[variables('mylearningvnetSubnet2Prefix')]"
+                      }
+                  }
+              ]
+          }
+      }
+  ],
+  "variables": {
+      "mylearningvnetPrefix": "10.0.0.0/16",
+      "mylearningvnetSubnet1Name": "Subnet-1",
+      "mylearningvnetSubnet1Prefix": "10.0.0.0/24",
+      "mylearningvnetSubnet2Name": "Subnet-2",
+      "mylearningvnetSubnet2Prefix": "10.0.1.0/24"
+  }
+}
